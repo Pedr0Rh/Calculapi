@@ -1,3 +1,4 @@
+#Documentação, informações do projeto e participantes na README!
 from flask import Flask, json
 
 main = Flask(__name__)
