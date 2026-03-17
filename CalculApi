@@ -1,0 +1,47 @@
+from flask import Flask, json
+
+main = Flask(__name__)
+
+result = [{
+    "a": "",
+    "b": "",
+    "Operacao": "",
+    "Resultado": ""
+}]
+
+def calculator(a, b, op):
+    if op == "+":
+        result[0]["Resultado"] = a + b
+    elif op == "-":
+        result[0]["Resultado"] = a - b
+    elif op == "x":
+        result[0]["Resultado"] = a * b
+    elif op == "/":
+        result[0]["Resultado"] = a / b
+
+a = int(input('Digite um número: '))
+b = int(input('Digite um número: '))
+op = input("Digite a operação (+, -, x, /): ")
+
+result[0]["a"] = a
+result[0]["b"] = b
+
+if op == "-":
+    result[0]["Operacao"] = "Subtracao"
+elif op == "+":
+    result[0]["Operacao"] = "Adicao"
+elif op == "x":
+    result[0]["Operacao"] = "Multiplicacao"
+elif op == "/":
+    result[0]["Operacao"] = "Divisao"
+
+calculator(a, b, op)
+
+json_dados = json.dumps(result)
+
+@main.route('/')
+def home():
+    return json_dados
+
+if __name__ == "__main__":
+    main.run()
